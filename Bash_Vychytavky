@@ -1,0 +1,200 @@
+Dobre WWW je na 
+   http://www.pantek.com/library/linux/Advanced-Bash-Scripting/
+
+Pekny Uvod:
+http://www.fit.vutbr.cz/study/courses/IOS/public/Lab/cviceni/cviceni.txt
+
+
+- ${FbankDir//\//\\/} - (INAV) V Retezcove promenne FbankDir nahradi lomitka / kombinaci \/, dulezite pro pouziti v SEDku.
+- Pokud chci vytvorit alias s parametrem nutno vytvorit funkci
+function NazevFunkce()   #function neni treba psat on neni blbej
+    {
+     .
+     .
+     .	
+    }
+- Pokud chci aby for in oddeloval po jen po konci radku a ne po mezere, tab a konci radku, Musim to specifikovat v promenne IFS. A to IFS=" stisknu enter napisu " a zas stisknu enter.
+Pr. for bla in `find /net/karafiat_u1/Karaf/ -type d`;do chmod a+x "$bla"; done
+Pokud se na dane ceste vyskytovat adresare s mezerama nebude to fungovat.
+- Prace s poli: Zapis:
+		   krokos[$i]=$[ $i + 10]
+		Cteni:
+		   echo ${krokos[$i]}
+- Prace s case:
+  case "$variable" in
+
+ "$condition1" )
+ command...
+ ;;
+
+ "$condition2" | "$condition3" )
+ command...
+ ;;
+
+esac
+
+- Tvorba menu s pomoci select
+select volba in vul tele prase konec; do
+   case $volba in
+   vul )
+     echo "$volba jses"
+     ;;
+   tele )
+    echo "$volba budes"
+    ;;
+   prase )
+    echo "$volba je fajn"
+    ;;
+   konec )
+   break
+   ;;
+   esac
+done
+
+- Test na deklaraci promenne
+  ${KOKOS:?}   # Pokud neexistuje ci je prazdna vypise hlasku
+  ${KOKOS:=halo} # Pokud neexistuje ci je prazdna tak ji naplni
+
+- Prace s retezci
+  ${#KOKOS}  - vraci delku retezce v promenne
+  ${KOKOS:2} - vraci retezec bez dvou prvnich znaku
+  ${KOKOS:0:3} - vraci pouze prvni 3 znaky z retezce
+  ${FILE_PATH##*/} - vrati jmeno souboru
+  ${FILE_PATH%/*}  - vrati cestu
+
+
+tr $'\t' ' '                 - nahradi tabelacni symboly mezerami
+cut  -d ' ' -f 2,3,7,10-     - rezseka to podle ' ' a vybere sloupec 2,3,7,10 a zbytek
+sed -n '/[BCI][0-9].CSA/{s/\\FIXED2CS\\//;s/\\/\//;s/ /\//;s/\[[a-z]*\]//g;p;}'                              - vybere pouzety radky ktere obsahuji B,C nebo I a nejake cislo. V nich provede operace v {.....}
+tr -s ' '                    - slouci vice mezer do jedne
+
+psbook   file.ps > file2.ps  zprehazi strany tak aby se to dalo svazat jako knizka
+psnup -2 file.ps > file2.ps  sprskne dve stranky na jednu
+psnup -2 -m20mm -b-10mm  - reguluje okraje
+psset -t   dela oboustranny poskript (otaci po sirce) - pouziva lukas pro piko knizky
+psset -d   dela oboustranny poskript (otaci po delce) - beznejsi
+lpr -Pdup file.ps   - posila to na duplexku 
+dela lukasovi knizecky
+     cat $1 | psbook | psnup -2 | psset -t -o ${2:-"-"}
+
+
+################## AWK #############
+Cte dva soubory najednou a radek po radku
+awk '{
+getline line1 <"SOUBOR1"; printf("\n1:%s 2:%s \n", $0 ,$NF); $0 = line1; printf("1:%s 2:%s\n",  $0,$NF)  }' SOUBOR2
+
+## Nebo to jde jednoduseji prikazem
+paste SOUBOR1 SOUBOR2 .... 
+
+
+#### Vytiskne text v hexa (v ascii -t c)
+od  -c -t x1
+
+####################################
+
+#Merging pdf
+gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=merged.pdf -dBATCH 1.pdf 2.pdf 3.pdf
+
+#Convert xps -> pdf
+gxps \
+  -o output.pdf \
+  -sDEVICE=pdfwrite \
+   input.xps
+
+
+#### Vyroba iso zCD
+
+dd if=/dev/cdrom of=VYSTUP.iso
+
+### Vypise co je na konci tohoto linku
+readlink -f 
+
+###  mov to avi
+mencoder -o /mnt/sdc1/anomalie2.avi -ovc lavc -lavcopts vcodec=mpeg4 -oac mp3lame -lameopts vbr=3 /mnt/sdc1/anomalie2.mov
+
+###  css protected DVD
+#Install css
+sudo apt-get install libdvdread4
+sudo /usr/share/doc/libdvdread4/install-css.sh
+acidrip - wraper for mencoder it basicaly run:
+mencoder dvd://1 -dvd-device /dev/dvd  -aid 129   -info srcform="DVD ripped by acidrip.sf.net" -oac mp3lame -lameopts abr:br=128  -ovc lavc -lavcopts vcodec=mpeg4:vhq:v4mv:vqmin=2:vbitrate=5000 -vf pp=de,crop=0:0:0:0,scale=480:-2    -o "/home/karaf/smurfs_legend_of_smurfy_hollow2.avi"
+
+### make and mount iso from DVD
+dd if=/dev/dvd of=movie.iso
+mount -t iso9660 -o ro,loop=/dev/loop0 movie.iso /media/cdrom
+
+###
+ulimit -a   # Vypise limity pro daneho usera
+
+####
+Print Graphics card nfo
+lspci -v -s lspci | awk '/VGA/{print $1}' | sed -n '/Memory.*,prefetchable/s/.*\[size=\([^]]\+\)\]/\1/p' ## memory
+lshw -C display ## some other stuff
+
+####
+lsblk              ## info o rozdeleni disku
+sudo fdisk -l      ## print partition info
+sudo mlabel -i /dev/sdc1 ::usb_XXGB         ## rename F32 partition
+sudo ntfslabel /dev/sdb1 1TB_NTFS_external  ## rename NTFS partition
+
+###
+ping -b -c 2 192.168.15.255   #send 2 broadcast packet to router broadcast adress
+arp -n                        # print arp table (IP adres HWtable)
+
+## 
+umount -l   # i kdyz je to blokle... prorazi.
+##
+tcpdump -i eth0  # print komunikace v siti
+autossh -t karafiat@kazi.fit.vutbr.cz "ssh -t pckarafiat \"screen -rd\""   ## Lepsi v pripade ze je naprd conection
+sshfs login@netpath:path dir      # mountne netpath do adresare; path empty -> home
+
+## Zmena MAC adresay
+ip link show eth0   # Zobrazi MAC adresu (link/ether 00:1d:98:5a:d1:3a)
+# Zmena 
+ip link set dev eth0 down			# Vypne
+ip link set dev eth0 address XX:XX:XX:XX:XX:XX  # Nastavi na XX:...
+ip link set dev eth0 up	     			# Zapne  
+
+disc=3
+for device in eth0 wlan0; do
+  adr=$(ip link show $device | awk '/link.ether/{print $2}')
+  adr_new=$(echo $adr | gawk -F: -v disc=$disc '{printf $1; 
+for(i=2;i<=NF;i++) { num="0x" $i; 
+  num_new=sprintf("%02x",strtonum(num)-disc);
+  num_new=substr(num_new,length(num_new)-1); printf ":" num_new 
+}; 
+printf "\n" }')
+  ip link set dev $device down
+  ip link set dev $device address $adr_new
+  ip link set dev $device up
+done
+
+## Crackovani WIFIn
+kismet   - hlavne ale zjistuje informace co beha vzduchem
+wifite   - tool na WEP crack
+
+
+##
+convert -density 300 in.eps out.png   # vyssi kvalita nez ps2png
+convert -resize  30% in.jpg out.jpg   # srazi kvalitu na 30%
+ 
+
+# Kodovani souboru
+gpg -c file      #zakodovani
+gpg -d file.gpg  #odkodovani
+
+# Prehozeni stdin vs stdout
+command 3>&1 1>&2 2>&3
+ #Nebo pres mkfifo
+
+# Ceska/US klavesnice v xkach
+setxkbmap cz -variant qwerty
+setxkbmap us
+
+## diff 
+meld file1 file2 # mooc pekny xrozhrani
+kcompare
+kdiff3
+
+## Adresar scriptu ktery je spusten
+$(dirname $(readlink -f $0))    # readlink -f : doplni soubor/link do full cesty a dirname vyrizne jen adresar

@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ "$1" == "-" ]; then
+    input=/dev/stdin
+else
+    input=$1 
+fi
+
+cat $input | psbook | psnup -2 | psset -t -o ${2:-"-"}
