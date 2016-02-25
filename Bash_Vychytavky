@@ -198,3 +198,17 @@ kdiff3
 
 ## Adresar scriptu ktery je spusten
 $(dirname $(readlink -f $0))    # readlink -f : doplni soubor/link do full cesty a dirname vyrizne jen adresar
+
+## Cisteni skenovanych stranek
+# Taken from http://www.auditeon.com/software%3aunpaper_test
+black_treshold=0.8
+unpaper -b $black_treshold --no-mask-scan --no-mask-center --no-deskew --no-wipe --no-border --no-border-scan --no-border-align --overwrite -t pbm infile.pgm outfile.pgm
+
+#or
+
+ pgmdeshadow IMGP0172.pgm | pnmnorm -maxexpand=50 > IMGP0172_clean.pgm
+
+#or
+
+gscan2pdf
+
