@@ -111,6 +111,8 @@ readlink -f
 
 ###  mov to avi
 mencoder -o /mnt/sdc1/anomalie2.avi -ovc lavc -lavcopts vcodec=mpeg4 -oac mp3lame -lameopts vbr=3 /mnt/sdc1/anomalie2.mov
+### Other compres line
+mencoder -oac mp3lame -ovc lavc -lavcopts acodec=mp3,1bitrate=128,vcodec=mpeg4,vbitrate=800,vhq,vm4v -o MVI_exhibice_zlin.compr.AVI MVI_exhibice_zlin.AVI
 
 ###  css protected DVD
 #Install css
