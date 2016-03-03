@@ -214,3 +214,11 @@ unpaper -b $black_treshold --no-mask-scan --no-mask-center --no-deskew --no-wipe
 
 gscan2pdf
 
+### Mount Android
+sudo apt-get install mtpfs mtp-tools
+sudo mkdir /media/MTPdevice
+sudo chmod 775 /media/MTPdevice
+sudo mtpfs -o allow_other /media/MTPdevice
+
+
+
