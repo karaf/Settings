@@ -1,0 +1,9 @@
+termcapinfo xterm ti@:te@
+
+#escape "^x"
+#markkeys "h=^B:l=^F:$=^E"
+
+altscreen on
+startup_message off
+caption always "%{= kB}%-w%{=s kB}%50>%n %t %{-}%+w%<"
+defutf8 on
