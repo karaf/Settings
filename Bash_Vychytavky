@@ -216,3 +216,7 @@ unpaper -b $black_treshold --no-mask-scan --no-mask-center --no-deskew --no-wipe
 
 gscan2pdf
 
+
+# Frozen xfce:
+rm -rf .cache/sessions
+rm .config/xfce4/xfconf/xfce-perchannel-xml/display.xml 
