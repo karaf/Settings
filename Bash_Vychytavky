@@ -93,7 +93,9 @@ od  -c -t x1
 ####################################
 
 #Merging pdf
-gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=merged.pdf -dBATCH 1.pdf 2.pdf 3.pdf
+gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=merged.pdf -dPDFSETTINGS=/prepress -dBATCH 1.pdf 2.pdf 3.pdf
+pdftk file1.pdf file2.pdf cat output -
+convert -density 300x300 -quality 100 mine1.pdf mine2.pdf merged.pdf
 
 #Convert xps -> pdf
 gxps \
