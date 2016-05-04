@@ -1,0 +1,31 @@
+# Show the push/fetch targets 
+git remote show origin
+cat .git/config 
+
+
+# Show the repository
+git remote -v
+
+
+# Reset to origin
+git fetch --all
+git reset --hard origin/master
+
+# Temporaly ignore changes for commit
+git update-index --assume-unchanged $file
+# Take it back
+git update-index --no-assume-unchanged $file
+
+
+# Show all remote branches
+git branch -r
+
+# Change branch to master
+git checkout master
+
+# Save changes, pull and put them back
+git stash
+git pull
+git stash pop
+
+
