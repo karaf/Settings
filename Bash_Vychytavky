@@ -220,6 +220,9 @@ gscan2pdf
 rm -rf .cache/sessions
 rm .config/xfce4/xfconf/xfce-perchannel-xml/display.xml 
 
+ #replace  xfce 
+xfwm4 --replace
+
 ### Mount Android
 sudo apt-get install mtpfs mtp-tools
 sudo mkdir /media/MTPdevice
