@@ -203,6 +203,12 @@ kdiff3
 ## Adresar scriptu ktery je spusten
 $(dirname $(readlink -f $0))    # readlink -f : doplni soubor/link do full cesty a dirname vyrizne jen adresar
 
+## Hledani souboru mladsich nez mesic
+find -type f -mtime -30 -exec ls -l {} \; > last30days.txt
+nebo rychlejsi
+find -type f -mtime -30 -printf "%M %u %g %TR %TD %p\n" > last30days.txt
+
+
 ## Cisteni skenovanych stranek
 # Taken from http://www.auditeon.com/software%3aunpaper_test
 black_treshold=0.8
