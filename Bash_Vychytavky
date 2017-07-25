@@ -147,10 +147,6 @@ arp -n                        # print arp table (IP adres HWtable)
 
 ## 
 umount -l   # i kdyz je to blokle... prorazi.
-##
-tcpdump -i eth0  # print komunikace v siti
-autossh -t karafiat@kazi.fit.vutbr.cz "ssh -t pckarafiat \"screen -rd\""   ## Lepsi v pripade ze je naprd conection
-sshfs login@netpath:path dir      # mountne netpath do adresare; path empty -> home
 
 ## Zmena MAC adresay
 ip link show eth0   # Zobrazi MAC adresu (link/ether 00:1d:98:5a:d1:3a)
@@ -172,6 +168,17 @@ printf "\n" }')
   ip link set dev $device address $adr_new
   ip link set dev $device up
 done
+
+# -- net stuff
+tcpdump -i eth0 # print komunikace v siti
+autossh -t karafiat@kazi.fit.vutbr.cz "ssh -t pckarafiat \"screen -rd\""   ## Lepsi v pripade ze je naprd conection
+sshfs login@netpath:path dir      # mountne netpath do adresare; path empty -> home
+netstat -nlp    # tiskne info o znamych adresach a portech na siti
+iptables -L -n  # firewall rules
+lsof -i :ssh    # info about ssh connections
+netstat -an | grep <portnumber> # jestli je pouzit
+lsof -i:<portnumber> # co pouziva port
+
 
 ## Crackovani WIFIn
 kismet   - hlavne ale zjistuje informace co beha vzduchem
