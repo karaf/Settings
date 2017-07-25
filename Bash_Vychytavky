@@ -235,4 +235,11 @@ sudo mkdir /media/MTPdevice
 sudo chmod 775 /media/MTPdevice
 sudo mtpfs -o allow_other /media/MTPdevice
 
+### Patch
+diff -u oldfile-name-here newfile-name-here > patch.diff 
+patch -i patch.diff -o output-file input-file
+
+
+
+
 
