@@ -226,4 +226,12 @@ sudo mkdir /media/MTPdevice
 sudo chmod 775 /media/MTPdevice
 sudo mtpfs -o allow_other /media/MTPdevice
 
+###
+# Play by HDMI
+https://wiki.archlinux.org/index.php/PulseAudio/Examples#Finding_HDMI_output
+# or kill playaudio
+aplay -l
+aplay -D plughw:0,3 /usr/share/sounds/alsa/Front_Right.wav # test
+mplayer -ao alsa:device=hw=0.3  xxx.avi
 
+ 
