@@ -108,6 +108,9 @@ gxps \
 
 dd if=/dev/cdrom of=VYSTUP.iso
 
+#### bootable ISO -> USB
+dd bs=4M if=ubuntu-12.04.2-server-i386.iso of=/dev/sdb # from https://www.linux.com/blog/how-burn-iso-usb-drive
+
 ### Vypise co je na konci tohoto linku
 readlink -f 
 
@@ -147,10 +150,6 @@ arp -n                        # print arp table (IP adres HWtable)
 
 ## 
 umount -l   # i kdyz je to blokle... prorazi.
-##
-tcpdump -i eth0  # print komunikace v siti
-autossh -t karafiat@kazi.fit.vutbr.cz "ssh -t pckarafiat \"screen -rd\""   ## Lepsi v pripade ze je naprd conection
-sshfs login@netpath:path dir      # mountne netpath do adresare; path empty -> home
 
 ## Zmena MAC adresay
 ip link show eth0   # Zobrazi MAC adresu (link/ether 00:1d:98:5a:d1:3a)
@@ -172,6 +171,17 @@ printf "\n" }')
   ip link set dev $device address $adr_new
   ip link set dev $device up
 done
+
+# -- net stuff
+tcpdump -i eth0 # print komunikace v siti
+autossh -t karafiat@kazi.fit.vutbr.cz "ssh -t pckarafiat \"screen -rd\""   ## Lepsi v pripade ze je naprd conection
+sshfs login@netpath:path dir      # mountne netpath do adresare; path empty -> home
+netstat -nlp    # tiskne info o znamych adresach a portech na siti
+iptables -L -n  # firewall rules
+lsof -i :ssh    # info about ssh connections
+netstat -an | grep <portnumber> # jestli je pouzit
+lsof -i:<portnumber> # co pouziva port
+
 
 ## Crackovani WIFIn
 kismet   - hlavne ale zjistuje informace co beha vzduchem
@@ -203,6 +213,12 @@ kdiff3
 ## Adresar scriptu ktery je spusten
 $(dirname $(readlink -f $0))    # readlink -f : doplni soubor/link do full cesty a dirname vyrizne jen adresar
 
+## Hledani souboru mladsich nez mesic
+find -type f -mtime -30 -exec ls -l {} \; > last30days.txt
+nebo rychlejsi
+find -type f -mtime -30 -printf "%M %u %g %TR %TD %p\n" > last30days.txt
+
+
 ## Cisteni skenovanych stranek
 # Taken from http://www.auditeon.com/software%3aunpaper_test
 black_treshold=0.8
@@ -220,11 +236,22 @@ gscan2pdf
 rm -rf .cache/sessions
 rm .config/xfce4/xfconf/xfce-perchannel-xml/display.xml 
 
+ #replace  xfce 
+xfwm4 --replace
+
 ### Mount Android
 sudo apt-get install mtpfs mtp-tools
 sudo mkdir /media/MTPdevice
 sudo chmod 775 /media/MTPdevice
 sudo mtpfs -o allow_other /media/MTPdevice
+
+### Patch
+diff -u oldfile-name-here newfile-name-here > patch.diff 
+patch -i patch.diff -o output-file input-file
+
+### Downsample by sox
+/homes/kazi/karafiat/local/bin/sox -G  $WFORM -t raw -b 16 -c 1 $TMPDIR/$TAG.raw rate 8k 
+# -G is doing automatic volume controll
 
 ###
 # Play by HDMI
@@ -233,5 +260,8 @@ https://wiki.archlinux.org/index.php/PulseAudio/Examples#Finding_HDMI_output
 aplay -l
 aplay -D plughw:0,3 /usr/share/sounds/alsa/Front_Right.wav # test
 mplayer -ao alsa:device=hw=0.3  xxx.avi
+
+
+
 
  
