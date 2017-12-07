@@ -108,6 +108,9 @@ gxps \
 
 dd if=/dev/cdrom of=VYSTUP.iso
 
+#### bootable ISO -> USB
+dd bs=4M if=ubuntu-12.04.2-server-i386.iso of=/dev/sdb # from https://www.linux.com/blog/how-burn-iso-usb-drive
+
 ### Vypise co je na konci tohoto linku
 readlink -f 
 
@@ -247,6 +250,10 @@ diff -u oldfile-name-here newfile-name-here > patch.diff
 patch -i patch.diff -o output-file input-file
 
 
+
+### Downsample by sox
+/homes/kazi/karafiat/local/bin/sox -G  $WFORM -t raw -b 16 -c 1 $TMPDIR/$TAG.raw rate 8k 
+# -G is doing automatic volume controll
 
 
 
