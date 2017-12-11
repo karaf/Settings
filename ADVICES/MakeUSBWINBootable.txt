@@ -1,7 +1,7 @@
 # https://onetransistor.blogspot.cz/2014/09/make-bootable-windows-usb-from-ubuntu.html
 # Use gparted to create fat32 partition with name "WUSB1840" and "boot" flag
 
-sudo grub-install --target=i386-pc --boot-directory="/media/karaf/WUSB1840/boot" /dev/sdb1
+sudo grub-install --target=i386-pc --boot-directory="/media/karaf/WUSB1840/boot" /dev/sdb
 
 
 echo 'default=1  
