@@ -77,6 +77,9 @@ lpr -Pdup file.ps   - posila to na duplexku
 dela lukasovi knizecky
      cat $1 | psbook | psnup -2 | psset -t -o ${2:-"-"}
 
+lp -o sides=two-sided-long-edge -d bxupgm file.pdf
+
+
 
 ################## AWK #############
 Cte dva soubory najednou a radek po radku
