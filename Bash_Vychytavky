@@ -194,7 +194,7 @@ wifite   - tool na WEP crack
 ##
 convert -density 300 in.eps out.png   # vyssi kvalita nez ps2png
 convert -resize  30% in.jpg out.jpg   # srazi kvalitu na 30%
- 
+epstool --copy --bbox in.eps out.eps  # Upravi okraje aby nebyly
 
 # Kodovani souboru
 gpg -c file      #zakodovani
@@ -265,6 +265,7 @@ aplay -D plughw:0,3 /usr/share/sounds/alsa/Front_Right.wav # test
 mplayer -ao alsa:device=hw=0.3  xxx.avi
 
 
-
+### copy by rsync
+rsync -R file1 file2.... $outdir   # vytvori cili stejnou adresarovou struktutu jako je od $PWD dal
 
  
