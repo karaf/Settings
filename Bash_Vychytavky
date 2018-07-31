@@ -77,6 +77,9 @@ lpr -Pdup file.ps   - posila to na duplexku
 dela lukasovi knizecky
      cat $1 | psbook | psnup -2 | psset -t -o ${2:-"-"}
 
+lp -o sides=two-sided-long-edge -d bxupgm file.pdf
+
+
 
 ################## AWK #############
 Cte dva soubory najednou a radek po radku
@@ -209,7 +212,7 @@ wifite   - tool na WEP crack
 ##
 convert -density 300 in.eps out.png   # vyssi kvalita nez ps2png
 convert -resize  30% in.jpg out.jpg   # srazi kvalitu na 30%
- 
+epstool --copy --bbox in.eps out.eps  # Upravi okraje aby nebyly
 
 # Kodovani souboru
 gpg -c file      #zakodovani
@@ -267,11 +270,20 @@ sudo mtpfs -o allow_other /media/MTPdevice
 diff -u oldfile-name-here newfile-name-here > patch.diff 
 patch -i patch.diff -o output-file input-file
 
-
-
 ### Downsample by sox
 /homes/kazi/karafiat/local/bin/sox -G  $WFORM -t raw -b 16 -c 1 $TMPDIR/$TAG.raw rate 8k 
 # -G is doing automatic volume controll
 
+###
+# Play by HDMI
+https://wiki.archlinux.org/index.php/PulseAudio/Examples#Finding_HDMI_output
+# or kill playaudio
+aplay -l
+aplay -D plughw:0,3 /usr/share/sounds/alsa/Front_Right.wav # test
+mplayer -ao alsa:device=hw=0.3  xxx.avi
 
 
+### copy by rsync
+rsync -R file1 file2.... $outdir   # vytvori cili stejnou adresarovou struktutu jako je od $PWD dal
+
+ 
