@@ -10,11 +10,35 @@ git remote -v
 # Reset to origin
 git fetch --all
 git reset --hard origin/master
+git pull origin master
 
 # Temporaly ignore changes for commit
 git update-index --assume-unchanged $file
 # Take it back
 git update-index --no-assume-unchanged $file
+
+# Create branch which will track remote branch 
+git checkout --track -b binbzha/latency-control-blstm origin/binbzha/latency-control-blstm
+
+# Temporaly ignore changes for commit
+git update-index --assume-unchanged $file
+# Take it back
+git update-index --no-assume-unchanged $file
+
+# Made patch from one commit
+git format-patch -1 <sha>  
+# Apply patch # https://ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/
+git apply --stat   $patch_file
+git apply --check  $patch_file
+git am --signoff < $patch_file # or   git am -3 < $patch_file
+
+# Create upstream and merge working branch into upstream
+git remote -v # print number of remote streams
+git remote add upstream  git@github.com:espnet/espnet.git # Add one more remote stream called "upstream"
+git diff upstream/multilingual --name-status  # differences between current and "upstream"
+git fetch upstream multilingual      # fetch changes from "upstream/multilingual"
+git merge  upstream/multilingual     # merge with fetched
+git push                             # put it into repository
 
 
 # Show all remote branches
