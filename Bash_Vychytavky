@@ -77,6 +77,7 @@ lpr -Pdup file.ps   - posila to na duplexku
 dela lukasovi knizecky
      cat $1 | psbook | psnup -2 | psset -t -o ${2:-"-"}
 
+lp -o sides=two-sided-long-edge -d bxupgm file.pdf # Selected pages # -P 1-2 
 
 ################## AWK #############
 Cte dva soubory najednou a radek po radku
@@ -93,9 +94,21 @@ od  -c -t x1
 ####################################
 
 #Merging pdf
-gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=merged.pdf -dPDFSETTINGS=/prepress -dBATCH 1.pdf 2.pdf 3.pdf
+gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=merged.pdf -dBATCH 1.pdf 2.pdf 3.pdf
 pdftk file1.pdf file2.pdf cat output -
 convert -density 300x300 -quality 100 mine1.pdf mine2.pdf merged.pdf
+
+# Select pages
+gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=1 -dLastPage=1 -sOutputFile=$outfile $infile
+
+# Compress pdf
+ gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress  -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$outfile $infile 
+#-dPDFSETTINGS=/screen lower quality, smaller size.
+#-dPDFSETTINGS=/ebook for better quality, but slightly larger pdfs.
+#-dPDFSETTINGS=/prepress output similar to Acrobat Distiller "Prepress Optimized" setting
+#-dPDFSETTINGS=/printer selects output similar to the Acrobat Distiller "Print Optimized" setting
+#-dPDFSETTINGS=/default selects output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file
+
 
 #Convert xps -> pdf
 gxps \
@@ -104,9 +117,14 @@ gxps \
    input.xps
 
 
+
+
 #### Vyroba iso zCD
 
 dd if=/dev/cdrom of=VYSTUP.iso
+
+#### bootable ISO -> USB
+dd bs=4M if=ubuntu-12.04.2-server-i386.iso of=/dev/sdb # from https://www.linux.com/blog/how-burn-iso-usb-drive
 
 ### Vypise co je na konci tohoto linku
 readlink -f 
@@ -173,6 +191,21 @@ printf "\n" }')
   ip link set dev $device up
 done
 
+# -- net stuff
+tcpdump -i eth0 # print komunikace v siti
+autossh -t karafiat@kazi.fit.vutbr.cz "ssh -t pckarafiat \"screen -rd\""   ## Lepsi v pripade ze je naprd conection
+sshfs login@netpath:path dir      # mountne netpath do adresare; path empty -> home
+netstat -nlp    # tiskne info o znamych adresach a portech na siti
+iptables -L -n  # firewall rules
+lsof -i :ssh    # info about ssh connections
+netstat -an | grep <portnumber> # jestli je pouzit
+lsof -i:<portnumber> # co pouziva port
+# Pripojeni pres proxy
+ ssh -D 8888 karaf@host_in_cz
+ # potom ve svym browseru nastavis, ze se ma pripojit pres proxy:
+ localhost:8888
+
+
 ## Crackovani WIFIn
 kismet   - hlavne ale zjistuje informace co beha vzduchem
 wifite   - tool na WEP crack
@@ -181,7 +214,7 @@ wifite   - tool na WEP crack
 ##
 convert -density 300 in.eps out.png   # vyssi kvalita nez ps2png
 convert -resize  30% in.jpg out.jpg   # srazi kvalitu na 30%
- 
+epstool --copy --bbox in.eps out.eps  # Upravi okraje aby nebyly
 
 # Kodovani souboru
 gpg -c file      #zakodovani
@@ -202,6 +235,12 @@ kdiff3
 
 ## Adresar scriptu ktery je spusten
 $(dirname $(readlink -f $0))    # readlink -f : doplni soubor/link do full cesty a dirname vyrizne jen adresar
+
+## Hledani souboru mladsich nez mesic
+find -type f -mtime -30 -exec ls -l {} \; > last30days.txt
+nebo rychlejsi
+find -type f -mtime -30 -printf "%M %u %g %TR %TD %p\n" > last30days.txt
+
 
 ## Cisteni skenovanych stranek
 # Taken from http://www.auditeon.com/software%3aunpaper_test
@@ -229,6 +268,29 @@ sudo mkdir /media/MTPdevice
 sudo chmod 775 /media/MTPdevice
 sudo mtpfs -o allow_other /media/MTPdevice
 
+
 # Remote desktop in PHX
 xfreerdp dt-win-01.int.phonexia.com
 
+### Patch
+diff -u oldfile-name-here newfile-name-here > patch.diff 
+patch -i patch.diff -o output-file input-file
+
+
+### Downsample by sox
+/homes/kazi/karafiat/local/bin/sox -G  $WFORM -t raw -b 16 -c 1 $TMPDIR/$TAG.raw rate 8k 
+# -G is doing automatic volume controll
+
+###
+# Play by HDMI
+https://wiki.archlinux.org/index.php/PulseAudio/Examples#Finding_HDMI_output
+# or kill playaudio
+aplay -l
+aplay -D plughw:0,3 /usr/share/sounds/alsa/Front_Right.wav # test
+mplayer -ao alsa:device=hw=0.3  xxx.avi
+
+
+### copy by rsync
+rsync -R file1 file2.... $outdir   # vytvori cili stejnou adresarovou struktutu jako je od $PWD dal
+
+ 
