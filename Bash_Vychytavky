@@ -229,4 +229,6 @@ sudo mkdir /media/MTPdevice
 sudo chmod 775 /media/MTPdevice
 sudo mtpfs -o allow_other /media/MTPdevice
 
+# Remote desktop in PHX
+xfreerdp dt-win-01.int.phonexia.com
 
