@@ -53,3 +53,6 @@ git pull
 git stash pop
 
 
+# git from different source
+ssh -L 1234:10.6.0.149:22 gw.phonexia.com			 # ssh tunel from port 1234 to phonexia
+git clone git+ssh://localhost:1234/pulugundla/chain-5-gen.git .  # make a git repo
