@@ -293,4 +293,9 @@ mplayer -ao alsa:device=hw=0.3  xxx.avi
 ### copy by rsync
 rsync -R file1 file2.... $outdir   # vytvori cili stejnou adresarovou struktutu jako je od $PWD dal
 
- 
+# Removing weird characters in awk
+echo xx―xx | od -t cx1   # c- character, x- hexa, 1 byte space
+0000000   x   x 342 200 225   x   x  \n
+         78  78  e2  80  95  78  78  0a
+
+echo xx―xx | awk '{s="\xe2\x80\x95"; gsub(s,""); print}'
