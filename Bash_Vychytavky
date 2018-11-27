@@ -169,6 +169,8 @@ umount -l   # i kdyz je to blokle... prorazi.
 tcpdump -i eth0  # print komunikace v siti
 autossh -t karafiat@kazi.fit.vutbr.cz "ssh -t pckarafiat \"screen -rd\""   ## Lepsi v pripade ze je naprd conection
 sshfs login@netpath:path dir      # mountne netpath do adresare; path empty -> home
+fusermount -u dir                 # umount sshfs
+
 
 ## Zmena MAC adresay
 ip link show eth0   # Zobrazi MAC adresu (link/ether 00:1d:98:5a:d1:3a)
