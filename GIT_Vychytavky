@@ -25,6 +25,11 @@ git update-index --assume-unchanged $file
 # Take it back
 git update-index --no-assume-unchanged $file
 
+# Delete branch
+git push --delete origin $branch_name # delete remote
+git branch -d $branch_name            # -d only if it is merged, -D behave as with --force, so do not care about merge
+
+
 # Made patch from one commit
 git format-patch -1 <sha>  
 # Apply patch # https://ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/
