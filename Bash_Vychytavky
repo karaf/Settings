@@ -310,3 +310,13 @@ echo xx―xx | od -t cx1   # c- character, x- hexa, 1 byte space
          78  78  e2  80  95  78  78  0a
 
 echo xx―xx | awk '{s="\xe2\x80\x95"; gsub(s,""); print}'
+
+
+# Comenting in Bash
+: <<'END'
+blablablalb
+END
+
+# Trasovani co "cmd" prikaz/skript presne dela
+strace -f cmd
+
