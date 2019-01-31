@@ -25,6 +25,11 @@ git update-index --assume-unchanged $file
 # Take it back
 git update-index --no-assume-unchanged $file
 
+# Delete branch
+git push --delete origin $branch_name # delete remote
+git branch -d $branch_name            # -d only if it is merged, -D behave as with --force, so do not care about merge
+
+
 # Made patch from one commit
 git format-patch -1 <sha>  
 # Apply patch # https://ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/
@@ -41,8 +46,14 @@ git merge  upstream/multilingual     # merge with fetched
 git push                             # put it into repository
 
 
+
+
 # Show all remote branches
 git branch -r
+
+# Create remote branch
+git branch branch_name
+git push origin branch_name
 
 # Change branch to master
 git checkout master
@@ -54,5 +65,6 @@ git stash pop
 
 
 # git from different source
-ssh -L 1234:10.6.0.149:22 gw.phonexia.com			 # ssh tunel from port 1234 to phonexia
-git clone git+ssh://localhost:1234/pulugundla/chain-5-gen.git .  # make a git repo
+ssh -L 1234:10.6.0.149:22 gw.phonexia.com			              # ssh tunel from port 1234 to phonexia
+git clone ssh://git@localhost:1234/pulugundla/chain-5-gen.git  ./ # make a git repo
+

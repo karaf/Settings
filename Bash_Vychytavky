@@ -62,6 +62,15 @@ done
   ${FILE_PATH##*/} - vrati jmeno souboru
   ${FILE_PATH%/*}  - vrati cestu
 
+# Hashe
+declare -A hashmap
+hashmap["key"]="value"
+hashmap["key2"]="value2"
+echo "${hashmap["key"]}"
+for key in ${!hashmap[@]}; do echo $key; done
+for value in ${hashmap[@]}; do echo $value; done
+echo hashmap has ${#hashmap[@]} elements
+
 
 tr $'\t' ' '                 - nahradi tabelacni symboly mezerami
 cut  -d ' ' -f 2,3,7,10-     - rezseka to podle ' ' a vybere sloupec 2,3,7,10 a zbytek
@@ -169,6 +178,8 @@ umount -l   # i kdyz je to blokle... prorazi.
 tcpdump -i eth0  # print komunikace v siti
 autossh -t karafiat@kazi.fit.vutbr.cz "ssh -t pckarafiat \"screen -rd\""   ## Lepsi v pripade ze je naprd conection
 sshfs login@netpath:path dir      # mountne netpath do adresare; path empty -> home
+fusermount -u dir                 # umount sshfs
+
 
 ## Zmena MAC adresay
 ip link show eth0   # Zobrazi MAC adresu (link/ether 00:1d:98:5a:d1:3a)
