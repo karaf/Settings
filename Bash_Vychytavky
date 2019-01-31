@@ -279,6 +279,9 @@ sudo mkdir /media/MTPdevice
 sudo chmod 775 /media/MTPdevice
 sudo mtpfs -o allow_other /media/MTPdevice
 
+### Najit balicek kde se nachazi xxx soubor
+sudo apt-file search xxx
+
 
 # Remote desktop in PHX
 xfreerdp dt-win-01.int.phonexia.com
