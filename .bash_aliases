@@ -1,5 +1,6 @@
 
-export PATH=./:~/bin:$PATH
+export PATH=./:~/bin:~/AMI/tools:$PATH
+
 
 export EDITOR=emacs
 
@@ -12,7 +13,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 alias cp='cp -d'
-
+alias ll='ls -l'
 alias ja='ssh -X -l karafiat kazi.fit.vutbr.cz'
 
 function em(){

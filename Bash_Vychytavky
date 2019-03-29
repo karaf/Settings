@@ -86,8 +86,9 @@ lpr -Pdup file.ps   - posila to na duplexku
 dela lukasovi knizecky
      cat $1 | psbook | psnup -2 | psset -t -o ${2:-"-"}
 
-lp -o sides=two-sided-long-edge -d bxupgm file.pdf # Selected pages # -P 1-2 
-
+lp  -o sides=two-sided-long-edge -d bxupgm file.pdf # Selected pages # -P 1-2 
+nebo 
+lpr -o sides=two-sided-long-edge file.pdf
 ################## AWK #############
 Cte dva soubory najednou a radek po radku
 awk '{
@@ -278,6 +279,10 @@ sudo apt-get install mtpfs mtp-tools
 sudo mkdir /media/MTPdevice
 sudo chmod 775 /media/MTPdevice
 sudo mtpfs -o allow_other /media/MTPdevice
+
+### Najit balicek kde se nachazi xxx soubor
+sudo apt-file update
+sudo apt-file search xxx
 
 
 # Remote desktop in PHX
