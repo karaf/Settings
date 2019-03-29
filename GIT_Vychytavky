@@ -68,3 +68,5 @@ git stash pop
 ssh -L 1234:10.6.0.149:22 gw.phonexia.com			              # ssh tunel from port 1234 to phonexia
 git clone ssh://git@localhost:1234/pulugundla/chain-5-gen.git  ./ # make a git repo
 
+# remember login for defined time (default 15min)
+git config --global credential.helper 'cache --timeout=36000'
