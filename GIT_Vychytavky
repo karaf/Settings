@@ -29,6 +29,8 @@ git update-index --no-assume-unchanged $file
 git push --delete origin $branch_name # delete remote
 git branch -d $branch_name            # -d only if it is merged, -D behave as with --force, so do not care about merge
 
+# conflict merge can be resolved
+git mergetool
 
 # Made patch from one commit
 git format-patch -1 <sha>  
@@ -46,6 +48,15 @@ git merge  upstream/multilingual     # merge with fetched
 git push                             # put it into repository
 
 
+# add other origin url
+git remote add origin-https https://karafiat@git.fit.vutbr.cz/iveselyk/material_kaldi.git
+git push origin-https martas
+
+
+# slouceni commitu 
+git rebase -i HASH # s (squash) for merging
+## kdyz se to posere
+git rebase --abort
 
 
 # Show all remote branches
