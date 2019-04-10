@@ -228,10 +228,10 @@
 ;; vdiff
 ;;(load "/mnt/matylda3/karafiat/BABEL/GIT/emacs-vdiff/vdiff.el")
 
-(if window-system
-      (setq clipboard-coding-system 'latin-2)
-    (set-terminal-coding-system 'latin-2))
-(setq process-coding-system-alist '((".*" . iso-8859-2)))
+;;(if window-system
+;;      (setq clipboard-coding-system 'latin-2)
+;;    (set-terminal-coding-system 'latin-2))
+;;(setq process-coding-system-alist '((".*" . iso-8859-2)))
 
 (setq dos-codepage 852)
 (setq default-enable-multibyte-characters t)
