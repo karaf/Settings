@@ -255,3 +255,6 @@
 ;; My section
 (global-set-key (kbd "C-x C-f") 'ffap)
 (normal-erase-is-backspace-mode 0)
+
+;; set shel indent to 2 instead def 4
+(setq sh-basic-offset 2)
