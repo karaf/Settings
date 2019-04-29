@@ -258,3 +258,10 @@
 
 ;; set shel indent to 2 instead def 4
 (setq sh-basic-offset 2)
+
+;; make trailing whitespaces to red
+(setq-default show-trailing-whitespace t)
+(setq-default indicate-empty-lines t)
+
+;; set spaces instead of tabs
+(setq-default indent-tabs-mode nil)
