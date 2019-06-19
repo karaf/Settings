@@ -155,6 +155,10 @@ mencoder dvd://1 -dvd-device /dev/dvd  -aid 129   -info srcform="DVD ripped by a
 dd if=/dev/dvd of=movie.iso
 mount -t iso9660 -o ro,loop=/dev/loop0 movie.iso /media/cdrom
 
+### Cut part of video
+ffmpeg -ss $start -i $input -t $duration -c copy $output
+
+
 ###
 ulimit -a   # Vypise limity pro daneho usera
 

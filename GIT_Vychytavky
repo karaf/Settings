@@ -1,3 +1,10 @@
+#!/bin/bash
+ 
+# Show status
+git status
+# Show tracked files
+git ls-files
+
 # Show the push/fetch targets 
 git remote show origin
 cat .git/config 
