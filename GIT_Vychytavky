@@ -1,3 +1,10 @@
+#!/bin/bash
+ 
+# Show status
+git status
+# Show tracked files
+git ls-files
+
 # Show the push/fetch targets 
 git remote show origin
 cat .git/config 
@@ -29,6 +36,8 @@ git update-index --no-assume-unchanged $file
 git push --delete origin $branch_name # delete remote
 git branch -d $branch_name            # -d only if it is merged, -D behave as with --force, so do not care about merge
 
+# conflict merge can be resolved
+git mergetool
 
 # Made patch from one commit
 git format-patch -1 <sha>  
@@ -46,6 +55,15 @@ git merge  upstream/multilingual     # merge with fetched
 git push                             # put it into repository
 
 
+# add other origin url
+git remote add origin-https https://karafiat@git.fit.vutbr.cz/iveselyk/material_kaldi.git
+git push origin-https martas
+
+
+# slouceni commitu 
+git rebase -i HASH # s (squash) for merging
+## kdyz se to posere
+git rebase --abort
 
 
 # Show all remote branches
@@ -54,6 +72,7 @@ git branch -r
 # Create remote branch
 git branch branch_name
 git push origin branch_name
+git push -u origin branch_name # create upstream of current branch into origin/branch_name
 
 # Change branch to master
 git checkout master
@@ -68,3 +87,5 @@ git stash pop
 ssh -L 1234:10.6.0.149:22 gw.phonexia.com			              # ssh tunel from port 1234 to phonexia
 git clone ssh://git@localhost:1234/pulugundla/chain-5-gen.git  ./ # make a git repo
 
+# remember login for defined time (default 15min)
+git config --global credential.helper 'cache --timeout=36000'

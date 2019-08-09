@@ -62,6 +62,10 @@ done
   ${FILE_PATH##*/} - vrati jmeno souboru
   ${FILE_PATH%/*}  - vrati cestu
 
+# trap - dobre na cisteni pri odchodu z shellu 
+trap "echo Exit - Cleaning; rm $tmpdir" EXIT INT TERM
+
+
 # Hashe
 declare -A hashmap
 hashmap["key"]="value"
@@ -154,6 +158,10 @@ mencoder dvd://1 -dvd-device /dev/dvd  -aid 129   -info srcform="DVD ripped by a
 ### make and mount iso from DVD
 dd if=/dev/dvd of=movie.iso
 mount -t iso9660 -o ro,loop=/dev/loop0 movie.iso /media/cdrom
+
+### Cut part of video
+ffmpeg -ss $start -i $input -t $duration -c copy $output
+
 
 ###
 ulimit -a   # Vypise limity pro daneho usera
@@ -317,3 +325,13 @@ echo xx―xx | od -t cx1   # c- character, x- hexa, 1 byte space
          78  78  e2  80  95  78  78  0a
 
 echo xx―xx | awk '{s="\xe2\x80\x95"; gsub(s,""); print}'
+
+
+# Comenting in Bash
+: <<'END'
+blablablalb
+END
+
+# Trasovani co "cmd" prikaz/skript presne dela
+strace -f cmd
+
