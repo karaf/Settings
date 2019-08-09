@@ -180,6 +180,8 @@ tcpdump -i eth0  # print komunikace v siti
 autossh -t karafiat@kazi.fit.vutbr.cz "ssh -t pckarafiat \"screen -rd\""   ## Lepsi v pripade ze je naprd conection
 sshfs login@netpath:path dir      # mountne netpath do adresare; path empty -> home
 fusermount -u dir                 # umount sshfs
+# PHX - marvin
+sshfs -o gid=1002 -o umask=000 karafiat@srv-sge-04:/media/marvin /media/marvin
 
 
 ## Zmena MAC adresay
