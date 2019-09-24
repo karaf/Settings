@@ -81,6 +81,9 @@ git checkout master
 git stash
 git pull
 git stash pop
+git stash list              # list of all stashes
+git stash show              # show what is in last stash
+git stash show -p stash@{1} # show what is stash@{1}
 
 
 # git from different source
