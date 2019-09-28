@@ -65,6 +65,12 @@ done
 # trap - dobre na cisteni pri odchodu z shellu 
 trap "echo Exit - Cleaning; rm $tmpdir" EXIT INT TERM
 
+# pocitani velikosti
+
+# pocet souboru v adresarich
+for folder in $(ls -a -I '.' -I '..') ; do   echo -ne "$folder " ; find $folder | wc -l ; done >nb-files.txt 
+# velikost adresaru do hloubky 4
+du -h -d 4
 
 # Hashe
 declare -A hashmap
