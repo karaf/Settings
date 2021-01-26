@@ -129,7 +129,7 @@ gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=1 -dLastPage=1 -sOutp
 #-dPDFSETTINGS=/prepress output similar to Acrobat Distiller "Prepress Optimized" setting
 #-dPDFSETTINGS=/printer selects output similar to the Acrobat Distiller "Print Optimized" setting
 #-dPDFSETTINGS=/default selects output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file
-
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dColorImageResolution=150 -dNOPAUSE  -dBATCH -sOutputFile=output.pdf input.pdf
 
 #Convert xps -> pdf
 gxps \
@@ -229,6 +229,8 @@ iptables -L -n  # firewall rules
 lsof -i :ssh    # info about ssh connections
 netstat -an | grep <portnumber> # jestli je pouzit
 lsof -i:<portnumber> # co pouziva port
+nmap -p 5000 192.168.0.* # scanuje port 5000 na dane adrese
+sudo snap connect nmap:network-control # pokud hlasi:: dnet: Failed to open device [device-name] QUITTING!
 # Pripojeni pres proxy
  ssh -D 8888 karaf@host_in_cz
  # potom ve svym browseru nastavis, ze se ma pripojit pres proxy:
@@ -342,3 +344,6 @@ END
 # Trasovani co "cmd" prikaz/skript presne dela
 strace -f cmd
 
+# Rozjeti bluetooth mysi pri Win i Linux
+# https://desktopi18n.wordpress.com/2018/02/02/bluetooth-mouse-in-dual-boot-of-windows-10-and-linux/
+# https://askubuntu.com/questions/253949/how-can-i-avoid-having-to-pair-my-bluetooth-mouse-all-the-time
