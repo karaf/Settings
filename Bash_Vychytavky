@@ -107,6 +107,8 @@ getline line1 <"SOUBOR1"; printf("\n1:%s 2:%s \n", $0 ,$NF); $0 = line1; printf(
 ## Nebo to jde jednoduseji prikazem
 paste SOUBOR1 SOUBOR2 .... 
 
+## Zaokrouhlovani (float -> int)
+echo  2.52690284 | awk '{printf "%.0f",$1}'
 
 #### Vytiskne text v hexa (v ascii -t c)
 od  -c -t x1
