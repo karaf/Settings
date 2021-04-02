@@ -1,10 +1,11 @@
+#!/bin/bash
 
 export PATH=./:~/bin:~/AMI/tools:$PATH
 
 
 export EDITOR=emacs
 
-export PS1='\h:\w`if [ $UID -eq 0 ]; then echo "#"; else echo "$"; fi`'
+export PS1='\h:\w`if [ $UID -eq 0 ]; then echo "# "; else echo "$ "; fi`'
 if [ -n "$INSIDE_EMACS" ]; then
      unset PROMPT_COMMAND 
 fi
