@@ -99,6 +99,7 @@ dela lukasovi knizecky
 lp  -o sides=two-sided-long-edge -d bxupgm file.pdf # Selected pages # -P 1-2 
 nebo 
 lpr -o sides=two-sided-long-edge file.pdf
+pdfbook2 file.pdf	    - udela booklet do file-book.pdf
 ################## AWK #############
 Cte dva soubory najednou a radek po radku
 awk '{

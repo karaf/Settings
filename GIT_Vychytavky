@@ -1,13 +1,13 @@
 #!/bin/bash
- 
+
 # Show status
 git status
 # Show tracked files
 git ls-files
 
-# Show the push/fetch targets 
+# Show the push/fetch targets
 git remote show origin
-cat .git/config 
+cat .git/config
 
 
 # Show the repository
@@ -24,7 +24,7 @@ git update-index --assume-unchanged $file
 # Take it back
 git update-index --no-assume-unchanged $file
 
-# Create branch which will track remote branch 
+# Create branch which will track remote branch
 git checkout --track -b binbzha/latency-control-blstm origin/binbzha/latency-control-blstm
 
 # Temporaly ignore changes for commit
@@ -40,7 +40,7 @@ git branch -d $branch_name            # -d only if it is merged, -D behave as wi
 git mergetool
 
 # Made patch from one commit
-git format-patch -1 <sha>  
+git format-patch -1 <sha>
 # Apply patch # https://ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/
 git apply --stat   $patch_file
 git apply --check  $patch_file
@@ -60,7 +60,7 @@ git remote add origin-https https://karafiat@git.fit.vutbr.cz/iveselyk/material_
 git push origin-https martas
 
 
-# slouceni commitu 
+# slouceni commitu
 git rebase -i HASH # s (squash) for merging
 ## kdyz se to posere
 git rebase --abort
@@ -70,9 +70,9 @@ git rebase --abort
 git branch -r
 
 # Create remote branch
-git branch branch_name
-git push origin branch_name
+git checkout -b branch_name # Create new branch a checkout there
 git push -u origin branch_name # create upstream of current branch into origin/branch_name
+git push -u origin HEAD     # more safe
 
 # Change branch to master
 git checkout master
