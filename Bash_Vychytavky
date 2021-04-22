@@ -147,10 +147,8 @@ gxps \
 dd if=/dev/cdrom of=VYSTUP.iso
 
 #### bootable ISO -> USB
-dd bs=4M if=ubuntu-12.04.2-server-i386.iso of=/dev/sdb # from https://www.linux.com/blog/how-burn-iso-usb-drive
-
-### Vypise co je na konci tohoto linku
-readlink -f 
+dd bs=4M if=/path/to/iso of=/dev/sdX  status=progress oflag=sync #unmounted /dev/sdX
+readlink -f ## Vypise co je na konci tohoto linku
 
 ###  mov to avi
 mencoder -o /mnt/sdc1/anomalie2.avi -ovc lavc -lavcopts vcodec=mpeg4 -oac mp3lame -lameopts vbr=3 /mnt/sdc1/anomalie2.mov
