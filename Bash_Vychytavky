@@ -1,4 +1,6 @@
-Dobre WWW je na 
+#!/bin/bash
+
+Dobre WWW je na
    http://www.pantek.com/library/linux/Advanced-Bash-Scripting/
 
 Pekny Uvod:
@@ -11,7 +13,7 @@ function NazevFunkce()   #function neni treba psat on neni blbej
     {
      .
      .
-     .	
+     .
     }
 - Pokud chci aby for in oddeloval po jen po konci radku a ne po mezere, tab a konci radku, Musim to specifikovat v promenne IFS. A to IFS=" stisknu enter napisu " a zas stisknu enter.
 Pr. for bla in `find /net/karafiat_u1/Karaf/ -type d`;do chmod a+x "$bla"; done
@@ -62,13 +64,13 @@ done
   ${FILE_PATH##*/} - vrati jmeno souboru
   ${FILE_PATH%/*}  - vrati cestu
 
-# trap - dobre na cisteni pri odchodu z shellu 
+# trap - dobre na cisteni pri odchodu z shellu
 trap "echo Exit - Cleaning; rm $tmpdir" EXIT INT TERM
 
 # pocitani velikosti
 
 # pocet souboru v adresarich
-for folder in $(ls -a -I '.' -I '..') ; do   echo -ne "$folder " ; find $folder | wc -l ; done >nb-files.txt 
+for folder in $(ls -a -I '.' -I '..') ; do   echo -ne "$folder " ; find $folder | wc -l ; done >nb-files.txt
 # velikost adresaru do hloubky 4
 du -h -d 4
 
@@ -92,12 +94,12 @@ psnup -2 file.ps > file2.ps  sprskne dve stranky na jednu
 psnup -2 -m20mm -b-10mm  - reguluje okraje
 psset -t   dela oboustranny poskript (otaci po sirce) - pouziva lukas pro piko knizky
 psset -d   dela oboustranny poskript (otaci po delce) - beznejsi
-lpr -Pdup file.ps   - posila to na duplexku 
+lpr -Pdup file.ps   - posila to na duplexku
 dela lukasovi knizecky
      cat $1 | psbook | psnup -2 | psset -t -o ${2:-"-"}
 
-lp  -o sides=two-sided-long-edge -d bxupgm file.pdf # Selected pages # -P 1-2 
-nebo 
+lp  -o sides=two-sided-long-edge -d bxupgm file.pdf # Selected pages # -P 1-2
+nebo
 lpr -o sides=two-sided-long-edge file.pdf
 pdfbook2 file.pdf	    - udela booklet do file-book.pdf
 ################## AWK #############
@@ -106,7 +108,7 @@ awk '{
 getline line1 <"SOUBOR1"; printf("\n1:%s 2:%s \n", $0 ,$NF); $0 = line1; printf("1:%s 2:%s\n",  $0,$NF)  }' SOUBOR2
 
 ## Nebo to jde jednoduseji prikazem
-paste SOUBOR1 SOUBOR2 .... 
+paste SOUBOR1 SOUBOR2 ....
 
 ## Zaokrouhlovani (float -> int)
 echo  2.52690284 | awk '{printf "%.0f",$1}'
@@ -125,7 +127,7 @@ convert -density 300x300 -quality 100 mine1.pdf mine2.pdf merged.pdf
 gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=1 -dLastPage=1 -sOutputFile=$outfile $infile
 
 # Compress pdf
- gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress  -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$outfile $infile 
+ gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress  -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$outfile $infile
 #-dPDFSETTINGS=/screen lower quality, smaller size.
 #-dPDFSETTINGS=/ebook for better quality, but slightly larger pdfs.
 #-dPDFSETTINGS=/prepress output similar to Acrobat Distiller "Prepress Optimized" setting
@@ -150,7 +152,7 @@ dd if=/dev/cdrom of=VYSTUP.iso
 dd bs=4M if=ubuntu-12.04.2-server-i386.iso of=/dev/sdb # from https://www.linux.com/blog/how-burn-iso-usb-drive
 
 ### Vypise co je na konci tohoto linku
-readlink -f 
+readlink -f
 
 ###  mov to avi
 mencoder -o /mnt/sdc1/anomalie2.avi -ovc lavc -lavcopts vcodec=mpeg4 -oac mp3lame -lameopts vbr=3 /mnt/sdc1/anomalie2.mov
@@ -190,32 +192,34 @@ sudo ntfslabel /dev/sdb1 1TB_NTFS_external  ## rename NTFS partition
 ping -b -c 2 192.168.15.255   #send 2 broadcast packet to router broadcast adress
 arp -n                        # print arp table (IP adres HWtable)
 
-## 
+##
 umount -l   # i kdyz je to blokle... prorazi.
 ##
 tcpdump -i eth0  # print komunikace v siti
 autossh -t karafiat@kazi.fit.vutbr.cz "ssh -t pckarafiat \"screen -rd\""   ## Lepsi v pripade ze je naprd conection
 sshfs login@netpath:path dir      # mountne netpath do adresare; path empty -> home
 fusermount -u dir                 # umount sshfs
+# Meta centrum
+sshfs skirit.ics.muni.cz:/storage/brno2/home/karafiat/ROZKAZ/shared /mnt/matylda3/karafiat/ROZKAZ/tasks/IMPORT/shared -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3
 # PHX - marvin
 sshfs -o gid=1002 -o umask=000 karafiat@srv-sge-04:/media/marvin /media/marvin
 
 
 ## Zmena MAC adresay
 ip link show eth0   # Zobrazi MAC adresu (link/ether 00:1d:98:5a:d1:3a)
-# Zmena 
+# Zmena
 ip link set dev eth0 down			# Vypne
 ip link set dev eth0 address XX:XX:XX:XX:XX:XX  # Nastavi na XX:...
-ip link set dev eth0 up	     			# Zapne  
+ip link set dev eth0 up	     			# Zapne
 
 disc=3
 for device in eth0 wlan0; do
   adr=$(ip link show $device | awk '/link.ether/{print $2}')
-  adr_new=$(echo $adr | gawk -F: -v disc=$disc '{printf $1; 
-for(i=2;i<=NF;i++) { num="0x" $i; 
+  adr_new=$(echo $adr | gawk -F: -v disc=$disc '{printf $1;
+for(i=2;i<=NF;i++) { num="0x" $i;
   num_new=sprintf("%02x",strtonum(num)-disc);
-  num_new=substr(num_new,length(num_new)-1); printf ":" num_new 
-}; 
+  num_new=substr(num_new,length(num_new)-1); printf ":" num_new
+};
 printf "\n" }')
   ip link set dev $device down
   ip link set dev $device address $adr_new
@@ -261,7 +265,7 @@ command 3>&1 1>&2 2>&3
 setxkbmap cz -variant qwerty
 setxkbmap us
 
-## diff 
+## diff
 meld file1 file2 # mooc pekny xrozhrani
 kcompare
 kdiff3
@@ -290,9 +294,9 @@ gscan2pdf
 
 #### Frozen xfce:
 rm -rf .cache/sessions
-rm .config/xfce4/xfconf/xfce-perchannel-xml/display.xml 
+rm .config/xfce4/xfconf/xfce-perchannel-xml/display.xml
 
- #replace  xfce 
+ #replace  xfce
 xfwm4 --replace
 
 ### Mount Android
@@ -310,12 +314,12 @@ sudo apt-file search xxx
 xfreerdp dt-win-01.int.phonexia.com
 
 ### Patch
-diff -u oldfile-name-here newfile-name-here > patch.diff 
+diff -u oldfile-name-here newfile-name-here > patch.diff
 patch -i patch.diff -o output-file input-file
 
 
 ### Downsample by sox
-/homes/kazi/karafiat/local/bin/sox -G  $WFORM -t raw -b 16 -c 1 $TMPDIR/$TAG.raw rate 8k 
+/homes/kazi/karafiat/local/bin/sox -G  $WFORM -t raw -b 16 -c 1 $TMPDIR/$TAG.raw rate 8k
 # -G is doing automatic volume controll
 
 ###
