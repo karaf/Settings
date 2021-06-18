@@ -82,6 +82,7 @@ echo "${hashmap["key"]}"
 for key in ${!hashmap[@]}; do echo $key; done
 for value in ${hashmap[@]}; do echo $value; done
 echo hashmap has ${#hashmap[@]} elements
+undef hashmap[key2]   # delete
 
 
 tr $'\t' ' '                 - nahradi tabelacni symboly mezerami
