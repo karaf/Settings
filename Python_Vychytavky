@@ -11,3 +11,12 @@ More advanced (autocomplete, colors, contex) `ipdb` (pip installable)
 ```# Put breakpoint in code
 import ipdb;ipdb.set_trace(context=30)
 # Use h on the pdb command line to se see available commands```
+
+# --------------
+# ---- Conda
+# --------------
+
+# conda create
+conda create --name ENV_NAME python=3.7.9
+# conda remove
+conda env remove -n ENV_NAME
