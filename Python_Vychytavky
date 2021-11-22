@@ -1,6 +1,8 @@
 #!/bin/env python
 
 # ---- python debug
+# https://switowski.com/blog/ipython-debugging
+
 
 ```# Put breakpoint in code
 import pdb;pdb.set_trace()
@@ -11,6 +13,11 @@ More advanced (autocomplete, colors, contex) `ipdb` (pip installable)
 ```# Put breakpoint in code
 import ipdb;ipdb.set_trace(context=30)
 # Use h on the pdb command line to se see available commands```
+
+# Using embed - run ipython at desired cmd line
+from IPython import embed; embed()
+
+
 
 # --------------
 # ---- Conda

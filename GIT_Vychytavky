@@ -87,7 +87,7 @@ git stash show -p stash@{1} # show what is stash@{1}
 
 
 # git from different source
-ssh -L 1234:10.12.3.92:22 gw.phonexia.com
+ssh -L 1234:10.12.117.96:22 gw.phonexia.com
 git clone ssh://git@localhost:1234/pulugundla/chain-5-gen.git  ./ # make a git repo
 
 # remember login for defined time (default 15min)
