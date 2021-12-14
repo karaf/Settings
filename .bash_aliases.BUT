@@ -1,0 +1,3 @@
+#!/bin/bash
+
+alias mnt.rozkaz='sshfs karafiat@skirit.ics.muni.cz:/storage/brno2/home/karafiat/ROZKAZ/shared /mnt/tmp/ROZKAZ/shared -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3'
