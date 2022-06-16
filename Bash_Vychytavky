@@ -165,6 +165,8 @@ find -lname "$PWD/*" | while read link ;do
    ln --force --symbolic --no-target-directory $relative_target $link
 done
 
+# check if link is active
+find . -xtype l
 
 ###  mov to avi
 mencoder -o /mnt/sdc1/anomalie2.avi -ovc lavc -lavcopts vcodec=mpeg4 -oac mp3lame -lameopts vbr=3 /mnt/sdc1/anomalie2.mov
