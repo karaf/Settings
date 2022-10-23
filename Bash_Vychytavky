@@ -159,6 +159,18 @@ dd bs=4M if=/path/to/iso of=/dev/sdX  status=progress oflag=sync #unmounted /dev
 ### Vypise co je na konci tohoto linku
 readlink -f
 
+# -- zmena absolutnich linku na relativni 
+symlinks -cr .
+# or bash like
+find -lname "$PWD/*" | while read link ;do  
+   target=$(readlink $link);
+   relative_target=$(realpath $target --relative-to=$link/.. --no-symlinks --canonicalize-missing);
+   ln --force --symbolic --no-target-directory $relative_target $link
+done
+
+# check if link is active
+find . -xtype l
+
 ###  mov to avi
 mencoder -o /mnt/sdc1/anomalie2.avi -ovc lavc -lavcopts vcodec=mpeg4 -oac mp3lame -lameopts vbr=3 /mnt/sdc1/anomalie2.mov
 ### Other compres line
@@ -181,6 +193,16 @@ ffmpeg -ss $start -i $input -t $duration -c copy $output
 
 ###
 ulimit -a   # Vypise limity pro daneho usera
+
+### When something is frozen
+lsof -p pid   # info about process
+strace -p pid
+
+pstree -p     # info about process structure (find parents...)
+ # -- ssh shortcuts
+~?   help
+~.   drop conection
+~~.  drop connection one step more 
 
 ####
 Print Graphics card nfo
