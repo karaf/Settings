@@ -117,6 +117,9 @@ echo  2.52690284 | awk '{printf "%.0f",$1}'
 #### Vytiskne text v hexa (v ascii -t c)
 od  -c -t x1
 
+# --- detekce codovani textu
+uchardet $text_file
+
 ####################################
 
 #Merging pdf
