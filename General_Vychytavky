@@ -1,0 +1,9 @@
+# --------
+# Thunderbird: Nastaveni Firefox jako browser
+
+Nastaveni -> Obecne -> Editor Predvoleb
+network.protocol-handler.warn-external.http(s) -> true
+
+A pak to pujde zmenit v
+Nastaveni -> Obecne -> Soubory a prilohy
+
