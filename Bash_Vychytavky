@@ -380,3 +380,7 @@ strace -f cmd
 # Rozjeti bluetooth mysi pri Win i Linux
 # https://desktopi18n.wordpress.com/2018/02/02/bluetooth-mouse-in-dual-boot-of-windows-10-and-linux/
 # https://askubuntu.com/questions/253949/how-can-i-avoid-having-to-pair-my-bluetooth-mouse-all-the-time
+
+# Nejede gpg
+export GPG_TTY=$(tty)
+# nebo: --pinentry-mode loopback
