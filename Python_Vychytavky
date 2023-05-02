@@ -30,3 +30,15 @@ envs/espnet/lib/python3.9/site-packages/easy-install.pth
 conda create --name ENV_NAME python=3.7.9
 # conda remove
 conda env remove -n ENV_NAME
+
+
+# --------------------------
+# --- Text processing
+
+#  ---- correct split utf characters
+from pyuegc import EGC  # pip install pyuegc
+string = 'Puélla in vī́llā vīcī́nā hábitat.'
+egc = EGC(string)
+print(egc)
+# ['P', 'u', 'é', 'l', 'l', 'a', ' ', 'i', 'n', ' ', 'v', 'ī́', 'l', 'l', 'ā', ' ', 'v', 'ī', 'c', 'ī́', 'n', 'ā', ' ', 'h', 'á', 'b', 'i', 't', 'a', 't', '.']
+
