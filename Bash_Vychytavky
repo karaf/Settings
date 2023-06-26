@@ -231,6 +231,8 @@ sshfs skirit.ics.muni.cz:/storage/brno2/home/karafiat/ROZKAZ/shared /mnt/matylda
 # PHX - marvin
 sshfs -o gid=1002 -o umask=000 karafiat@srv-sge-04:/media/marvin /media/marvin
 
+# copy ssh key into authorized keys
+ssh-copy-id karafiat@kazi.fit.vutbr.cz
 
 ## Zmena MAC adresay
 ip link show eth0   # Zobrazi MAC adresu (link/ether 00:1d:98:5a:d1:3a)
