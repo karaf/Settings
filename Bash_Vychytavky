@@ -345,6 +345,9 @@ diff -u oldfile-name-here newfile-name-here > patch.diff
 patch -i patch.diff -o output-file input-file
 
 
+### Audio File length if soxi is not working
+ffprobe -i ${file} -show_entries format=duration -v quiet -of csv="p=0"
+
 ### Downsample by sox
 /homes/kazi/karafiat/local/bin/sox -G  $WFORM -t raw -b 16 -c 1 $TMPDIR/$TAG.raw rate 8k
 # -G is doing automatic volume controll

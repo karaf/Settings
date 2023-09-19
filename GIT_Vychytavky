@@ -19,6 +19,9 @@ git fetch --all
 git reset --hard origin/master
 git pull origin master
 
+# restore a single file
+git checkout origin/master filename
+
 # Temporaly ignore changes for commit
 git update-index --assume-unchanged $file
 # Take it back
