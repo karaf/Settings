@@ -265,3 +265,15 @@
 
 ;; set spaces instead of tabs
 ;;(setq-default indent-tabs-mode nil)
+
+;; Adding elpy - python for emacs
+(add-to-list 'load-path "/mnt/matylda3/karafiat/GIT/elpy")
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
+;;(use-package elpy
+;;  :ensure t
+;;  :init
+;;  (elpy-enable))
