@@ -398,3 +398,9 @@ export GPG_TTY=$(tty)
 
 # Printscreen v cmdlajne
 xwd2png >/KAM/soubor.png
+
+# Trasovani ipadresy/hostname
+traceroute xxx
+
+# download from yvysilani ct
+https://github.com/bashonly/yt-dlp/releases/tag/2023.07.16.012858

