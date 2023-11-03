@@ -395,3 +395,6 @@ strace -f cmd
 # Nejede gpg
 export GPG_TTY=$(tty)
 # nebo: --pinentry-mode loopback
+
+# Printscreen v cmdlajne
+xwd2png >/KAM/soubor.png
