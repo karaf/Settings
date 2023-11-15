@@ -396,6 +396,9 @@ strace -f cmd
 export GPG_TTY=$(tty)
 # nebo: --pinentry-mode loopback
 
+# Printscreen v cmdlajne
+xwd2png >/KAM/soubor.png
+
 # Trasovani ipadresy/hostname
 traceroute xxx
 
