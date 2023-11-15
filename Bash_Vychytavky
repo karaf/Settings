@@ -401,3 +401,8 @@ traceroute xxx
 
 # download from yvysilani ct
 https://github.com/bashonly/yt-dlp/releases/tag/2023.07.16.012858
+# compress for Android
+ffmpeg -i In_Video -movflags +faststart -c:v libx264 -s 640x480 -strict experimental -c:a aac Out_video.mp4
+
+# --- archives
+zip -sf   # Just list content of the archive
