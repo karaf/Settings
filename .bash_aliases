@@ -2,6 +2,8 @@
 
 export PATH=./:~/bin:~/AMI/tools:$PATH
 
+# do not set DISPLAY inside of TMUX
+[ -n "$TMUX" ] && unset DISPLAY
 
 export EDITOR=emacs
 
