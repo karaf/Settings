@@ -354,6 +354,9 @@ ffprobe -i ${file} -show_entries format=duration -v quiet -of csv="p=0"
 /homes/kazi/karafiat/local/bin/sox -G  $WFORM -t raw -b 16 -c 1 $TMPDIR/$TAG.raw rate 8k
 # -G is doing automatic volume controll
 
+### cut part of audio by sox
+sox input.wav output.wav trim 0 00:35   # First 35s
+
 ###
 # Play by HDMI
 https://wiki.archlinux.org/index.php/PulseAudio/Examples#Finding_HDMI_output
