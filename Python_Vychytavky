@@ -42,3 +42,16 @@ egc = EGC(string)
 print(egc)
 # ['P', 'u', 'é', 'l', 'l', 'a', ' ', 'i', 'n', ' ', 'v', 'ī́', 'l', 'l', 'ā', ' ', 'v', 'ī', 'c', 'ī́', 'n', 'ā', ' ', 'h', 'á', 'b', 'i', 't', 'a', 't', '.']
 
+
+# -----------------------
+# operands functions and so
+https://www.itnetwork.cz/python/kolekce/komprehence-lambda-vyrazy-a-funkce-v-pythonu # nice overview
+
+print(str(1).zfill(2)) # zero padding
+
+# json load/write
+with open('strings.json') as f:
+    data = json.load(f)
+with open('strings.json','w') as f: json.dump(data,f) # python 2,3
+with open('data.json', 'w', encoding='utf-8') as f:   # python 3 only
+    json.dump(data, f, ensure_ascii=False, indent=4)
