@@ -20,11 +20,12 @@ alias ll='ls -l'
 alias ja='ssh -X -l karafiat kazi.fit.vutbr.cz'
 
 function em(){
-if [ -z $DISPLAY ]; then 
-   emacs $1 
-else
- emacs $1 &
-fi
+#if [ -z $DISPLAY ]; then 
+    unset DISPLAY
+    emacs $1 
+#else
+#    emacs $1 &
+#fi
 }
 
 
