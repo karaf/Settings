@@ -102,7 +102,8 @@
             ("\\.c$"  . c-mode)   ; to edit C code
             ("\\.h$"  . c-mode)   ; to edit C code
 	    ("\\.tex" . latex-mode)  ; jan added, was plain Tex, quite terrible
-	    ("\\.m" . matlab-mode) 
+	    ("\\.md"  . markdown-mode) 
+	    ("\\.m"   . matlab-mode) 
            ) auto-mode-alist))
 (autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
 
@@ -264,16 +265,12 @@
 (setq-default indicate-empty-lines t)
 
 ;; set spaces instead of tabs
-;;(setq-default indent-tabs-mode nil)
-
-;; Adding elpy - python for emacs
-(add-to-list 'load-path "/mnt/matylda3/karafiat/GIT/elpy")
+(setq-default indent-tabs-mode nil)
 
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(package-initialize)
 
-;;(use-package elpy
-;;  :ensure t
-;;  :init
-;;  (elpy-enable))
+;; To install package (for example markdown)
+;; M-x package-install RET markdown-mode RET
