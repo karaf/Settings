@@ -413,3 +413,5 @@ ffmpeg -i In_Video -movflags +faststart -c:v libx264 -s 640x480 -strict experime
 
 # --- archives
 zip -sf   # Just list content of the archive
+## Windows or gdrive zips bigger than 4G on linux
+https://github.com/pmqs/Fix-OneDrive-Zip
