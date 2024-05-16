@@ -145,6 +145,8 @@ gxps \
   -sDEVICE=pdfwrite \
    input.xps
 
+# Rotate pdf file
+pdfjam --angle 180 filename.pdf
 
 
 
