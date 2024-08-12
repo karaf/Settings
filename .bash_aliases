@@ -6,6 +6,7 @@ export PATH=./:~/bin:~/AMI/tools:$PATH
 [ -n "$TMUX" ] && unset DISPLAY
 
 export EDITOR=emacs
+export export GPG_TTY=$(tty)
 
 export PS1='\h:\w`if [ $UID -eq 0 ]; then echo "# "; else echo "$ "; fi`'
 if [ -n "$INSIDE_EMACS" ]; then
