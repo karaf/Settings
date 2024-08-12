@@ -62,6 +62,8 @@ git push                             # put it into repository
 git remote add origin-https https://karafiat@git.fit.vutbr.cz/iveselyk/material_kaldi.git
 git push origin-https martas
 
+# change origin url (for example from http -> ssh)
+git remote set-url origin git@path:name
 
 # slouceni commitu
 git rebase -i HASH # s (squash) for merging

@@ -190,6 +190,8 @@ mount -t iso9660 -o ro,loop=/dev/loop0 movie.iso /media/cdrom
 ### Cut part of video
 ffmpeg -ss $start -i $input -t $duration -c copy $output
 
+### fix conversion format for the subtitles
+cat file_in.srt | iconv  -f windows-1250  -t utf-8 > file_out.srt
 
 ###
 ulimit -a   # Vypise limity pro daneho usera
