@@ -1,0 +1,3 @@
+alias vpncurrent='[[ $(warp-cli vnet) == *"Currently selected: 4d58d7d0-6efa-4af2-b436-d916ae391f2c"* ]] && echo production || echo staging'
+alias vpnprod='warp-cli disconnect ; warp-cli vnet 4d58d7d0-6efa-4af2-b436-d916ae391f2c ; warp-cli connect'
+alias vpnstaging='warp-cli disconnect ; warp-cli vnet e33b8fc8-e1fc-41d9-aa5a-96667ddb3224 ; warp-cli connect'
